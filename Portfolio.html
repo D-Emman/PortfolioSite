@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Website</title>
+    <style>
+        /*My Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            margin-top: -130px;
+        }
+
+        header {
+            background: darkpurple;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+        }
+
+        /* Navbar */
+        nav {
+            background: #333;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            align-items: center;
+        }
+
+        .logo h2 {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .nav-links {
+            list-style-type: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .nav-links li a:hover {
+            background-color: #555;
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #333;
+                position: absolute;
+                top: 60px;
+                left: 0;
+            }
+
+            .nav-links li a {
+                padding: 15px;
+                text-align: center;
+                width: 100%;
+            }
+
+            .hamburger {
+                display: block;
+            }
+        }
+
+        /* Section Styling */
+        section {
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        /* About Section */
+        #about {
+            text-align: justify;
+        }
+
+        #about p {
+            font-size: 1.2rem;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .portfolio-item {
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: auto;
+        }
+
+        .portfolio-item h3 {
+            background: darkpurple;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .portfolio-item p {
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Image Carousel */
+        .carousel {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .carousel img {
+            width: 100%;
+            max-height: 100vh;
+            object-fit: cover;
+            object-position: top;
+            display: none;
+        }
+
+        .carousel img.active {
+            display: block;
+        }
+
+        .carousel-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-buttons button {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        /* Contact Section */
+        #contact form {
+            display: flex;
+            flex-direction: column;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        #contact label {
+            margin: 10px 0 5px;
+        }
+
+        #contact input, #contact textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #contact button {
+            margin-top: 20px;
+            padding: 10px;
+            background: darkpurple;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #contact button:hover {
+            background: #45a049;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #333;
+            color: white;
+            margin-top: 20px;
+        }
+
+        /* Apps Section */
+        #apps {
+            background: #f9f9f9;
+        }
+
+        .apps-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .app-item {
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .app-item img {
+            width: 100%;
+            height: auto;
+        }
+
+        .app-item h3 {
+            background: darkpurple;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .app-item p {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            padding: 5px;
+            margin-bottom: 40px;
+        }
+
+        .skills-list {
+            list-style: none;
+            columns: 2;
+            column-gap: 30px;
+        }
+
+        .skills-list li {
+            margin-bottom: 10px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .skills-list li::before {
+            content: '\2022';
+            color: #6c63ff;
+            position: absolute;
+            left: 0;
+        }
+
+        .work-experience {
+            margin-top: 20px;
+        }
+
+        .job {
+            margin-bottom: 20px;
+        }
+
+        .job h3 {
+            margin-bottom: 5px;
+            color: #6c63ff;
+            font-size: 1.2rem;
+        }
+
+        .job h4 {
+            font-size: 1rem;
+            color: #777;
+        }
+
+        .job p {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+
+        .job ul {
+            list-style: none;
+            margin-left: 20px;
+        }
+
+        .job ul li {
+            margin-bottom: 10px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .job ul li::before {
+            content: '\2022';
+            color: #6c63ff;
+            position: absolute;
+            left: 0;
+        }
+
+        @media (max-width: 768px) {
+            .portfolio, .apps-gallery {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Emmanuel Utulu</h1>
+        <p>Android Developer | Flutter & Kotlin Enthusiast</p>
+    </header>
+
+    <nav>
+        <div class="logo">
+            <h2>My Portfolio Site</h2>
+        </div>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">&#9776;</div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#images">Images</a></li>
+            <li><a href="#apps">Apps</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I am Emmanuel Utulu, a passionate Android developer with expertise in Flutter and Kotlin. I graduated with a first-class degree in Computer Engineering from the University of Benin, where I was awarded the Best Graduating Student in Computer Engineering for the 2022/2023 academic session.</p>
+        <p>I have a strong foundation in app development, experience with RESTful APIs, and a focus on app performance optimization. My technical skill set includes Dart, .NET, and Java.</p>
+    </section>
+
+    <div class="container">
+        <!-- Skills Section -->
+        <div class="section" id="skills">
+            <h2 style="text-align: center;">Skills</h2>
+            <ul class="skills-list">
+                <li>Programming languages: Dart, Kotlin, C#</li>
+                <li>Application development</li>
+                <li>Understanding of RESTful APIs</li>
+                <li>Experience with Firebase</li>
+                <li>App performance optimization</li>
+                <li>Teamwork and collaboration</li>
+                <li>Microsoft Office tools</li>
+                <li>Product development</li>
+                <li>Attention to detail</li>
+                <li>Problem-solving abilities</li>
+                <li>Active listening</li>
+                <li>Effective communication</li>
+            </ul>
+        </div>
+
+        <!-- Work Experience Section -->
+        <div class="section" id="work-experience">
+            <h2>Work Experience</h2>
+
+            <!-- Job 1 -->
+            <div class="job">
+                <h3>Schoolville Training Institute - Network Engineer Intern</h3>
+                <h4>Asaba, Delta, Nigeria • 06/2023 - 11/2023</h4>
+                <ul>
+                    <li>Supported staff members in their daily tasks, reducing workload burden and allowing for increased focus on higher priority assignments.</li>
+                    <li>Gained valuable experience working within a specific industry, applying learned concepts directly into relevant work situations.</li>
+                    <li>Installed and maintained data and circuits through routers, switches, and WAN devices.</li>
+                    <li>Gained hands-on experience in computer networking, increasing proficiency and expanding technical skill set.</li>
+                    <li>Gained knowledge of large-scale global enterprise network operations and security.</li>
+                </ul>
+            </div>
+
+            <!-- Job 2 -->
+            <div class="job">
+                <h3>NIIT - Web Design Intern</h3>
+                <h4>Asaba, Delta, Nigeria • 03/2021 - 07/2021</h4>
+                <ul>
+                    <li>Conducted usability testing sessions, gathering feedback from users to inform future design improvements.</li>
+                    <li>Designed eye-catching social media graphics that contributed to increased engagement rates on various platforms.</li>
+                    <li>Enhanced user experience by designing responsive web layouts and interfaces.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <section id="portfolio">
+        <h2>Portfolio</h2>
+        <section id="apps">
+            <h2>Android Apps</h2>
+            <div class="apps-gallery">
+                <div class="app-item">
+                    <img src="images/app1.jpg" alt="App 2">
+                    <h3>App 1</h3>
+                    <p>A simple notepad app that can be used to record important daily notes with a todo section also  .</p>
+                </div>
+                <div class="app-item">
+                    <img src="images/app2.jpg" alt="App 2">
+                    <h3>App 2</h3>
+                    <p>A comprehensive student's Grade point calculator built with flutter.</p>
+                </div>
+                <div class="app-item">
+                    <img src="images/app3.jpg" alt="App 2">
+                    <h3>App 3</h3>
+                    <p>A BMI calculator built with flutter.</p>
+                </div>
+                <div class="app-item">
+                    <img src="images/app4.jpg" alt="App 1">
+                    <h3>App 4</h3>
+                    <p>A finance tracker app designed to help users manage their funds effectively by keeping tracks of their expenses and income.</p>
+                </div>
+                <div class="app-item">
+                    <img src="images/app5.jpg" alt="App 2">
+                    <h3>App 5</h3>
+                    <p>A social media chatting app built with flutter.</p>
+                </div>
+                <div class="app-item">
+                    <img src="images/app6.jpg" alt="App 3">
+                    <h3>App 6</h3>
+                    <p>An app used to book rides like uber.</p>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <section id="images">
+        <h2>Images</h2>
+        <div class="carousel">
+            <img src="images/image1.jpg" class="active" alt="Image 1">
+            <img src="images/image2.jpg" alt="Image 2">
+            <img src="images/image3.jpg" alt="Image 3">
+            <img src="images/image4.jpg" alt="Image 4">
+            <img src="images/image5.jpg" alt="Image 5">
+            <div class="carousel-buttons">
+                <button id="prev">&#10094;</button>
+                <button id="next">&#10095;</button>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" rows="5" required></textarea>
+
+            <button type="submit">Send</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Emmanuel Utulu. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Image Carousel
+        const images = document.querySelectorAll('.carousel img');
+        const prev = document.getElementById('prev');
+        const next = document.getElementById('next');
+        let current = 0;
+
+        function showImage(index) {
+            images.forEach((img, i) => {
+                img.classList.toggle('active', i === index);
+            });
+        }
+
+        function autoPlay() {
+            current = (current + 1) % images.length;
+            showImage(current);
+        }
+
+        let interval = setInterval(autoPlay, 3000);
+
+        prev.addEventListener('click', () => {
+            current = (current === 0) ? images.length - 1 : current - 1;
+            showImage(current);
+            clearInterval(interval);
+            interval = setInterval(autoPlay, 3000);
+        });
+
+        next.addEventListener('click', () => {
+            current = (current === images.length - 1) ? 0 : current + 1;
+            showImage(current);
+            clearInterval(interval);
+            interval = setInterval(autoPlay, 3000);
+        });
+    </script>
+</body>
+</html>
